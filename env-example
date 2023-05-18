@@ -1,0 +1,7 @@
+PROJECT_NAME=server-api-talenti
+JOB_BASE_NAME=develop
+PORT_LOCAL=3000
+DB_NAME=talenti
+DB_PORT=5432
+DB_USER=admin
+DB_PASSWORD=admin
