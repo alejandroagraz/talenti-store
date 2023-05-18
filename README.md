@@ -100,11 +100,24 @@ newgrp docker
     Set up a local postgres database and modify the .env file with the connection parameters
     
 + Run the following commands from terminal
-    yarn install
-    yarn build
-    yarn run typeorm:generate-migration
-    yarn run typeorm:run-migrations
-    yarn run seed
+    
+    1. Install the dependencies
+        yarn install
+        
+    2. Generate the certificates to sign the tokens, enter the `src/auth/certs` folder once inside, execute the following command:
+        openssl genrsa -out jwt-private.key 2048 && openssl rsa -in jwt-private.key -pubout -out jwt-public.key
+    
+    3. Compile the application
+        yarn build
+    
+    4. Generate the migrations
+        yarn run typeorm:generate-migration
+    
+    5. Run the migrations
+        yarn run typeorm:run-migrations
+    
+    6. Run the seeders to create the test data
+        yarn run seed
     
 + When completing the previous steps we are ready to go to the browser to start using our application go to browser to url http://localhost:3000/auths/login
     User: admin
