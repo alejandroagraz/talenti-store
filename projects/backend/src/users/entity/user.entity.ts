@@ -19,7 +19,7 @@ export class UserEntity extends AbstractEntity {
   @IsString()
   lastname: string;
 
-  @Column({ type: 'varchar', nullable: true, length: 50 })
+  @Column({ type: 'varchar', nullable: true, unique: true, length: 50 })
   @IsString()
   username: string;
 
