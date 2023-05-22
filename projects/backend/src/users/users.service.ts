@@ -49,6 +49,26 @@ export class UsersService {
   }
 
   async createUser(data: CreateUserInput): Promise<UserDto> {
+
+    const isUSer: UserEntity = await this.userRepository
+        .createQueryBuilder('user')
+        .addSelect('user.password')
+        .where('user.state = :state', { state: true })
+        .andWhere(
+            new Brackets((qb) => {
+              qb.where('user.email = :email', {
+                email: data.email,
+              });
+              qb.orWhere('user.username = :username', {
+                username: data.username,
+              });
+            }),
+        )
+        .getOne();
+
+    if (isUSer)
+      throw new HttpException('username or email already exist', HttpStatus.NOT_IMPLEMENTED);
+
     const createUser = new UserEntity();
 
     createUser.firstname = data.firstname;
