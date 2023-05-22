@@ -1,0 +1,1576 @@
+{
+	"info": {
+		"_postman_id": "cb5271c8-b06a-43b4-9acb-feee0f07c2e7",
+		"name": "Talenty - Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6746053"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 201\"] = responseCode.code === 201;",
+									"",
+									"if (responseCode.code == 201) {",
+									"",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auths/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auths",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Store",
+			"item": [
+				{
+					"name": "Create Store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Gulgowski\",\n    \"email\": \"connlar@hotmail.com\",\n    \"phone\": \"1-508-401-7158 x595\",\n    \"address\": \"7987 Rice Crossing\",\n    \"city\": \"South Kaciport\",\n    \"zip_code\": \"89550-5400\",\n    \"state\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/stores",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/stores/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"stores",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2a9f360c-e3b7-4b5e-a8b9-eb60d59bae7b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One Store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Gulgowski\",\n    \"email\": \"connlar@hotmail.com\",\n    \"phone\": \"1-508-401-7158 x595\",\n    \"address\": \"7987 Rice Crossing\",\n    \"city\": \"South Kaciport\",\n    \"zip_code\": \"89550-5400\",\n    \"state\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/stores/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"stores",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "27f08906-3b6d-4955-881d-951b6eaaaa09",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove One Store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/stores/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"stores",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "9e4b40c5-4cfc-4217-8255-3a46b39100bf"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Stores",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/stores?page=1&take=5&order=ASC",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"stores"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "take",
+									"value": "5"
+								},
+								{
+									"key": "order",
+									"value": "ASC"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users?page=1&take=5&order=ASC",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "take",
+									"value": "5"
+								},
+								{
+									"key": "order",
+									"value": "ASC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"Jose\",\n    \"lastname\": \"Agraz\",\n    \"username\": \"admin\",\n    \"dni\": 12345678,\n    \"email\": \"alejandroagraz@gmail.com\",\n    \"password\": \"admin\",\n    \"phone\": \"+584127440921\",\n    \"state\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "e0b9bff3-f0e8-4937-9ed9-ac3f27442f44"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"Jose\",\n    \"lastname\": \"Agraz\",\n    \"username\": \"admin\",\n    \"dni\": 12345678,\n    \"email\": \"alejandroagraz@example.com\",\n    \"password\": \"admin\",\n    \"phone\": \"+584127440921\",\n    \"state\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "a8e3ef9b-5d89-469b-9284-dc274b91e065"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove One User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4fa74c1b-6b18-41bf-8800-a4fab821d95b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create avatar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/home/jagraz29/Imágenes/playa.jpeg"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/avatar/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"avatar",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "e0b9bff3-f0e8-4937-9ed9-ac3f27442f44"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Provider",
+			"item": [
+				{
+					"name": "Remove One Provider",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/product-providers/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-providers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "cd954603-8225-4ec6-a712-44c1b21a9196"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Provider",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Gusikowski, Roob and Kemmer\",\n    \"address\": \"3077 Labadie Heights\",\n    \"phone\": \"737-387-4483 x7461\",\n    \"state\": true,\n    \"email\": \"bashirian@hotmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/product-providers",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-providers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Provider",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/product-providers/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-providers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "b05b9a94-1109-4ccd-ad44-fe5e1309d5e1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One Providers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Gusikowski, Roob and Kemmer\",\n    \"address\": \"3077 Labadie Heights\",\n    \"phone\": \"737-387-4483 x7461\",\n    \"state\": false,\n    \"email\": \"bashirian@hotmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/product-providers/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-providers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "58c6a571-bbbe-4d3c-84a8-3a63a8031863"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Provider",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/product-providers?order=ASC&page=1&take=5",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-providers"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "ASC"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "take",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Create Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Baby\",\n    \"description\": \"Accusantium beatae magni iusto amet cum. Doloremque similique ex nemo perferendis vel maxime excepturi illo. Ducimus atque ut tempore rem.\",\n    \"state\": true,\n    \"store_id\": \"9e4b40c5-4cfc-4217-8255-3a46b39100bf\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/categories",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/categories/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "b24810e0-69d5-43a5-b61e-8b34603f740a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Baby\",\n    \"description\": \"Accusantium beatae magni iusto amet cum. Doloremque similique ex nemo perferendis vel maxime excepturi illo. Ducimus atque ut tempore rem.\",\n    \"state\": false,\n    \"store_id\": \"f4d29f7d-d661-447f-8392-c58e75bdfa5f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/categories/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "71c02270-ce66-479e-8708-03a3c8e755b5",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove One Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/categories/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "e77dd4ab-1260-450d-ab8c-d2df73f283e9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/categories?order=ASC&page=1&take=5",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "ASC"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "take",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@test.com\",\n    \"name\": \"test\",\n    \"phone\": \"+58 412-744-0921\",\n    \"address\": \"Base Aragua\",\n    \"city\": \"Maracay\",\n    \"zip_code\": \"2103\",\n    \"state\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/customers",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/customers/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"customers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "a43cd893-ea8e-481e-a464-c90460ee2b53"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nickolas\",\n    \"phone\": \"1-587-945-3200 x596\",\n    \"address\": \"34898 Jordon Plain\",\n    \"dni\": 49715041,\n    \"email\": \"nickolas13@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/customers/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"customers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "a43cd893-ea8e-481e-a464-c90460ee2b53",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove One Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/customers/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"customers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "30e4e664-e6fa-4fd6-bff7-16d768797a50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Customers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/customers?page=1&take=5&order=ASC",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"customers"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "take",
+									"value": "5"
+								},
+								{
+									"key": "order",
+									"value": "ASC"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delivery",
+			"item": [
+				{
+					"name": "Create Delivery",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 50,\n    \"delivery_address\": \"90256 Elouise Road\",\n    \"delivery_state\": \"SHIPPED\",\n    \"customer_id\": \"c266d6fb-bd48-4033-80c2-a4176f746b5b\",\n    \"product_id\": \"896459ad-d6fb-488c-b2bc-87292190e2ca\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/deliveries",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"deliveries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Delivery",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/deliveries/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"deliveries",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c4620694-e8cb-4ae4-9849-2c13994719f7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One Delivery",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 10,\n    \"delivery_address\": \"90256 Elouise Road\",\n    \"delivery_state\": \"SHIPPED\",\n    \"customer_id\": \"c266d6fb-bd48-4033-80c2-a4176f746b5b\",\n    \"product_id\": \"896459ad-d6fb-488c-b2bc-87292190e2ca\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/deliveries/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"deliveries",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c3f71ecf-fd6e-4bc5-94b9-1c1c561b9a81",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove One Delivery",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/deliveries/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"deliveries",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c4f4db5f-c57a-4f83-8f24-1cb826ce76c6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Deliveries",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/deliveries?page=1&take=5&order=ASC",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"deliveries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "take",
+									"value": "5"
+								},
+								{
+									"key": "order",
+									"value": "ASC"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Modern Granite Mouse\",\n    \"description\": \"Carbonite web goalkeeper gloves are ergonomically designed to give easy fit\",\n    \"price\": \"174.00\",\n    \"stock\": 267,\n    \"image\": \"https://loremflickr.com/640/480/food\",\n    \"state\": true,\n    \"category_id\": \"2773ba5b-1d7a-48d7-a901-4f3c3319bdcc\",\n    \"provider_id\": \"c39ea3c1-f8ca-4271-9e82-995c811f801e\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/products",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/products/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "896459ad-d6fb-488c-b2bc-87292190e2ca"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One Product",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Modern Granite Mouse\",\n    \"description\": \"Carbonite web goalkeeper gloves are ergonomically designed to give easy fit\",\n    \"price\": \"174.00\",\n    \"stock\": 267,\n    \"image\": \"https://loremflickr.com/640/480/food\",\n    \"state\": false,\n    \"category_id\": \"2773ba5b-1d7a-48d7-a901-4f3c3319bdcc\",\n    \"provider_id\": \"c39ea3c1-f8ca-4271-9e82-995c811f801e\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/products/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "bc5646d4-5853-4dd9-82d5-835ecc7c553b",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove One Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/products/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "ac72c068-a371-480b-b6cc-cd2916ef6b4a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/products?page=1&take=5&order=ASC",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "take",
+									"value": "5"
+								},
+								{
+									"key": "order",
+									"value": "ASC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create avatar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/home/jagraz29/Descargas/404.gif"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/products/avatar/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								"avatar",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "bc5646d4-5853-4dd9-82d5-835ecc7c553b"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
